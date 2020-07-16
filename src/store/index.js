@@ -1,11 +1,16 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-Vue.use(Vuex);
+import { authentication } from './authentication.module'
+import { authalert } from './authalert.module'
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {},
   mutations: {},
   actions: {},
-  modules: {}
-});
+  modules: {
+    authentication,
+    authalert
+  }
+})
