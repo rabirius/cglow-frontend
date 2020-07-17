@@ -1,10 +1,11 @@
 import axios from 'axios'
 export const userService = {
   login,
-  logout
+  logout,
+  gitlogin
 }
 const endpoint = 'http://192.168.0.2:8000/'
-function login(username, password) {
+async function login(username, password) {
   var data = JSON.stringify({ username, password })
   var config = {
     method: 'post',
@@ -14,17 +15,38 @@ function login(username, password) {
     },
     data: data
   }
-  return axios(config)
-    .then(function(response) {
-      if (response.data.refresh && response.data.token) {
-        localStorage.setItem('user', JSON.stringify(response.data))
-      }
-      return response.data
-    })
-    .catch(function(err) {
-      const error = err.response.data
-      return Promise.reject(error)
-    })
+  try {
+    const response = await axios(config)
+    if (response.data.refresh && response.data.token) {
+      localStorage.setItem('user', JSON.stringify(response.data))
+    }
+    return response.data
+  } catch (err) {
+    const error = err.response.data
+    return Promise.reject(error)
+  }
+}
+
+async function gitlogin(code) {
+  var data = JSON.stringify({ code })
+  var config = {
+    method: 'post',
+    url: endpoint + 'auth/github',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  }
+  try {
+    const response = await axios(config)
+    if (response.data.refresh && response.data.token) {
+      localStorage.setItem('user', JSON.stringify(response.data))
+    }
+    return response.data
+  } catch (err) {
+    const error = err.response.data
+    return Promise.reject(error)
+  }
 }
 
 function logout() {

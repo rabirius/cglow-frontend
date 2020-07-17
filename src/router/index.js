@@ -16,6 +16,11 @@ const routes = [
     component: () => import('../views/Login.vue')
   },
   {
+    path: '/auth/github',
+    name: 'github',
+    component: () => import('../views/AuthGithub.vue')
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('../views/NotFound.vue')
@@ -30,7 +35,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
-  const publicPages = ['/login']
+  const publicPages = ['/login', '/auth/github']
   const authRequired = !publicPages.includes(to.path)
   const loggedIn = localStorage.getItem('user')
 

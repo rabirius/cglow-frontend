@@ -1,9 +1,7 @@
 <template>
   <div id="login">
     <div class="form-wrapper">
-      <b-alert show variant="warning" v-if="alert.message">{{
-        alert.message
-      }}</b-alert>
+      <b-alert show variant="warning" v-if="alert.message">{{ alert.message }}</b-alert>
       <b-form @submit.prevent="handleSubmit">
         <b-form-group
           id="input-group-1"
@@ -16,7 +14,7 @@
             v-model="username"
             type="text"
             placeholder="Enter Username"
-            required=""
+            required
           ></b-form-input>
         </b-form-group>
         <b-form-group
@@ -30,10 +28,20 @@
             v-model="password"
             type="password"
             placeholder="Enter Password"
-            required=""
+            required
           ></b-form-input>
         </b-form-group>
         <b-button type="submit" variant="primary">Submit</b-button>
+        <div class="loader" v-if="loggingIn">
+          <b-spinner type="grow" label="Loading..."></b-spinner>
+        </div>
+        <div class="btn-wrapper">
+          <b-button
+            block
+            variant="primary"
+            href="https://github.com/login/oauth/authorize?scope=user:email&client_id=df195a09d07846326df2"
+          >Login With Github</b-button>
+        </div>
       </b-form>
     </div>
   </div>
@@ -63,11 +71,15 @@ export default {
     },
     logStatus() {
       return this.$store.state.authentication.status.loggedIn
+    },
+    loggingIn() {
+      return this.$store.state.authentication.status.loggingIn === true
     }
   },
   mounted() {
     if (this.$store.state.authentication.status.loggedIn === true) {
       this.$router.push('/')
+      return
     }
   }
 }
@@ -81,5 +93,12 @@ export default {
   @media (max-width: 720px) {
     width: 90%;
   }
+}
+.loader {
+  padding: 0 1rem;
+  display: inline;
+}
+.btn-wrapper {
+  padding: 2rem 1rem;
 }
 </style>
