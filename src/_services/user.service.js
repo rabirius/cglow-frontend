@@ -22,8 +22,11 @@ async function login(username, password) {
     }
     return response.data
   } catch (err) {
-    const error = err.response.data
-    return Promise.reject(error)
+    if (!err.status) {
+      return Promise.reject(err)
+    } else {
+      return Promise.reject(err.response.data)
+    }
   }
 }
 
@@ -44,8 +47,11 @@ async function gitlogin(code) {
     }
     return response.data
   } catch (err) {
-    const error = err.response.data
-    return Promise.reject(error)
+    if (!err.status) {
+      return Promise.reject(err)
+    } else {
+      return Promise.reject(err.response.data)
+    }
   }
 }
 
