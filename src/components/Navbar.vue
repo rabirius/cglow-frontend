@@ -42,7 +42,16 @@
         </b-navbar-nav>
         <b-navbar-nav>
           <b-nav-item @click="logout" v-if="isLoggedIn">Logout</b-nav-item>
-          <b-nav-item to="/login" v-else>Login</b-nav-item>
+          <template v-else>
+            <b-nav-item to="/login">Login</b-nav-item>
+            <b-button
+              to="/register"
+              size="sm"
+              class="my-2 my-sm-1"
+              variant="outline-dark"
+              >Register</b-button
+            >
+          </template>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>

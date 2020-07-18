@@ -23,6 +23,19 @@ export const authentication = {
         }
       )
     },
+    register({ dispatch, commit }, { username, email, password }) {
+      commit('LOGIN_REQUEST', { username })
+      userService.register(username, email, password).then(
+        data => {
+          commit('LOGIN_SUCCESS', data)
+          router.push('/')
+        },
+        error => {
+          commit('LOGIN_FAILURE', error)
+          dispatch('authalert/error', error, { root: true })
+        }
+      )
+    },
     // eslint-disable-next-line no-unused-vars
     gitlogin({ dispatch, commit }, { code }) {
       commit('LOGIN_REQUEST', { code })

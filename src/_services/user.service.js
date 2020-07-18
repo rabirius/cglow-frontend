@@ -1,6 +1,7 @@
 import axios from 'axios'
 export const userService = {
   login,
+  register,
   logout,
   gitlogin
 }
@@ -22,7 +23,32 @@ async function login(username, password) {
     }
     return response.data
   } catch (err) {
-    if (!err.status) {
+    if (!err.response) {
+      return Promise.reject(err)
+    } else {
+      return Promise.reject(err.response.data)
+    }
+  }
+}
+
+async function register(username, email, password) {
+  var data = JSON.stringify({ username, email, password })
+  var config = {
+    method: 'post',
+    url: endpoint + 'auth/register',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  }
+  try {
+    const response = await axios(config)
+    if (response.data.refresh && response.data.token) {
+      localStorage.setItem('user', JSON.stringify(response.data))
+    }
+    return response.data
+  } catch (err) {
+    if (!err.response) {
       return Promise.reject(err)
     } else {
       return Promise.reject(err.response.data)
@@ -47,7 +73,7 @@ async function gitlogin(code) {
     }
     return response.data
   } catch (err) {
-    if (!err.status) {
+    if (!err.response) {
       return Promise.reject(err)
     } else {
       return Promise.reject(err.response.data)
