@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import { authentication } from './authentication.module'
 import { authalert } from './authalert.module'
+import { gym } from './gym.module'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -11,6 +12,7 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     authentication,
-    authalert
+    authalert,
+    gym
   }
 })

@@ -2,12 +2,11 @@
   <div id="navbar">
     <b-navbar toggleable="lg" variant="light">
       <b-navbar-brand to="/">CgLow</b-navbar-brand>
-
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#">Link</b-nav-item>
+          <b-nav-item to="/gym/list">Gym</b-nav-item>
           <b-nav-item href="#" disabled>Disabled</b-nav-item>
         </b-navbar-nav>
 

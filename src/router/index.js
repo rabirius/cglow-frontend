@@ -52,6 +52,39 @@ const routes = [
     component: () => import('../views/AuthGithub.vue')
   },
   {
+    path: '/gym',
+    name: 'gym',
+    component: () => import('../views/Gym.vue'),
+    children: [
+      {
+        path: 'list',
+        name: 'gym_problem_list',
+        component: () => import('../components/Gym/ProblemList.vue')
+      },
+      {
+        path: 'problem/:id',
+        name: 'gym_problem',
+        component: () => import('../components/Gym/ProblemView.vue')
+      },
+      {
+        path: 'problem/:id/edit',
+        component: () => import('../components/Gym/Edit.vue'),
+        children: [
+          {
+            path: '/',
+            name: 'gym_problem_edit_statement',
+            component: () => import('../components/Gym/EditStatement.vue')
+          },
+          {
+            path: 'test',
+            name: 'gym_problem_edit_test',
+            component: () => import('../components/Gym/EditTest.vue')
+          }
+        ]
+      }
+    ]
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('../views/NotFound.vue')

@@ -1,7 +1,9 @@
 <template>
   <div id="login">
     <div class="form-wrapper">
-      <b-alert show variant="warning" v-if="alert.message">{{ alert.message }}</b-alert>
+      <b-alert show variant="warning" v-if="alert.message">{{
+        alert.message
+      }}</b-alert>
       <b-form @submit.prevent="handleSubmit">
         <b-form-group
           id="input-group-1"
@@ -40,7 +42,8 @@
             block
             variant="primary"
             href="https://github.com/login/oauth/authorize?scope=user:email&client_id=df195a09d07846326df2"
-          >Login With Github</b-button>
+            >Login With Github</b-button
+          >
         </div>
       </b-form>
     </div>

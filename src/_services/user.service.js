@@ -3,7 +3,8 @@ export const userService = {
   login,
   register,
   logout,
-  gitlogin
+  gitlogin,
+  refresh
 }
 const endpoint = 'http://192.168.0.2:8000/'
 async function login(username, password) {
@@ -28,6 +29,31 @@ async function login(username, password) {
     } else {
       return Promise.reject(err.response.data)
     }
+  }
+}
+
+async function refresh() {
+  var token = JSON.parse(localStorage.getItem('user'))
+  token = token.refresh
+  var config = {
+    method: 'get',
+    url: endpoint + 'auth/refresh',
+    headers: {
+      Authorization: token,
+      'Content-Type': 'application/json'
+    }
+  }
+  try {
+    const response = await axios(config)
+    if (response.data.refresh && response.data.token) {
+      localStorage.setItem('user', JSON.stringify(response.data))
+      return response.data.token
+    } else {
+      return Promise.reject('Token Verification error')
+    }
+  } catch (err) {
+    console.log(err.response)
+    return Promise.reject(err)
   }
 }
 
