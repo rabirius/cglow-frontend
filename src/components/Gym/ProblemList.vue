@@ -114,6 +114,8 @@ export default {
         }
       )
       this.$bvModal.hide('create-modal')
+      this.btnDisabled = false
+      this.title = ''
     }
   }
 }
