@@ -3,7 +3,12 @@
     <div class="info">
       <h2>CgLow Online Judge</h2>
       <h4>
-        Developed and maintined by <span><a href="#">TariqueNasrullah</a></span>
+        Developed and maintined by
+        <span
+          ><a href="https://github.com/TariqueNasrullah"
+            >TariqueNasrullah</a
+          ></span
+        >
       </h4>
     </div>
     <div class="construction">
