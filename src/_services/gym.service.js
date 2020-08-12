@@ -8,7 +8,7 @@ export const gymService = {
   createNew
 }
 
-const endpoint = 'api.cglow.codes/'
+const endpoint = 'http://api.cglow.codes/'
 
 async function list() {
   var userToken
