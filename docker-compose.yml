@@ -11,6 +11,7 @@ services:
       - ./letsencrypt-site:/usr/share/nginx/html
     networks:
       - docker-network
+    restart: unless-stopped
 networks:
   docker-network:
     driver: bridge
