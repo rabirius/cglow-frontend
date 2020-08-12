@@ -6,7 +6,7 @@ export const userService = {
   gitlogin,
   refresh
 }
-const endpoint = 'http://192.168.0.2:8000/'
+const endpoint = 'api.cglow.codes/'
 async function login(username, password) {
   var data = JSON.stringify({ username, password })
   var config = {
